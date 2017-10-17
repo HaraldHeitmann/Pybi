@@ -1,9 +1,9 @@
 # Pybi! 
 
 
-Pybi is intended to be a GUI to describe, visualize pandas DataFrames and eventually make some simple data analysis on them.
+Pybi is intended to be a GUI to describe and visualize pandas DataFrames. Eventually make some simple data analysis on them.
 
-Some natural dependencies will be pandas (implies numpy and matplotib) and PyQt4 to make the graphical user interface
+Some natural dependencies are pandas (implies numpy and matplotib) and PyQt4 for the graphical user interface
 
 ## Expectations:
 
@@ -18,4 +18,3 @@ Make a free, simple and scalable GUI *PowerBI-ish* or *Tableau-ish*
 2. FUNCTIONALITY:
 *. read data from disk
 *. do some plots/histograms/descriptions of a column(s)
-*. 
