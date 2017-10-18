@@ -2,7 +2,7 @@ from PyQt4.uic import loadUiType
 from mpl_toolkits.mplot3d import Axes3D
 
 from matplotlib.figure import Figure
-
+import pandas as pd
 import numpy as np
 from matplotlib.backends.backend_qt4agg import (
     FigureCanvasQTAgg as FigureCanvas,
@@ -15,10 +15,13 @@ class Main(QMainWindow, Ui_MainWindow):
         fig = Figure()
         self.addmpl(fig)
         self.rdBtn.clicked.connect(self.read)
-    
+        self.df = {}
     
     def read(self):
-        print str(self.inp.text())
+        try:
+            self.df[str(self.inp.text()).split('.')[0]]=pd.read_csv(str(self.inp.text()))
+        except IOError:
+            print 'No such file'
     def clear(self): 
         self.mplfigs.clear()
         self.rmmpl()
