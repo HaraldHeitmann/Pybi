@@ -1,5 +1,6 @@
 # Pybi! 
 
+## This branch in untested
 
 Pybi is intended to be a GUI to describe and visualize pandas DataFrames. Eventually make some simple data analysis on them.
 
