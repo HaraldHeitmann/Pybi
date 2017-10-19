@@ -36,7 +36,7 @@ class Main(QMainWindow, Ui_MainWindow):
     def addcol(self):
 
         items=[self.stgList.item(i).text() for i in xrange(self.stgList.count())]
-        print items
+
         if str(self.colList.currentItem().text()) not in items:
             self.stgList.addItem(str(self.colList.currentItem().text()))
         
