@@ -1,9 +1,10 @@
 from PyQt4.uic import loadUiType
 from mpl_toolkits.mplot3d import Axes3D
-
 from matplotlib.figure import Figure
 import pandas as pd
 import numpy as np
+from matplotlib import pyplot as plt
+
 from matplotlib.backends.backend_qt4agg import (
     FigureCanvasQTAgg as FigureCanvas,
     NavigationToolbar2QT as NavigationToolbar) 
@@ -19,6 +20,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.dfList.itemDoubleClicked.connect(self.df_selected)
         self.colList.itemDoubleClicked.connect(self.addcol)
         self.stgList.itemDoubleClicked.connect(self.rmvcol)
+        self.currentDF = None
     def read(self):
         try:
 	    lista=[str(self.dfList.item(i).text()) for i in xrange(self.dfList.count())]
@@ -29,6 +31,7 @@ class Main(QMainWindow, Ui_MainWindow):
         except IOError:
             print('No such file')
     def df_selected(self):
+        self.currentDF = self.df[str(self.dfList.currentItem().text())]
         if self.colList.count()==0:
             self.colList.addItems(self.df[str(self.dfList.currentItem().text())].columns)
         else:
@@ -41,8 +44,11 @@ class Main(QMainWindow, Ui_MainWindow):
 
         if str(self.colList.currentItem().text()) not in items:
             self.stgList.addItem(str(self.colList.currentItem().text()))
-        
-    
+            col=str(self.colList.currentItem().text())
+            f,ax = plt.subplots()
+            self.currentDF[col].plot(ax=ax)
+            self.rmmpl()
+            self.addmpl(f)	
     def rmvcol(self):
         self.stgList.takeItem(self.stgList.row(self.stgList.currentItem()))
     def clear(self): 
