@@ -21,9 +21,11 @@ class Main(QMainWindow, Ui_MainWindow):
         self.stgList.itemDoubleClicked.connect(self.rmvcol)
     def read(self):
         try:
-		self.df[str(self.inp.text()).split('.')[0]]=pd.read_csv(str(self.inp.text()))
-		self.dfList.addItem(str(self.inp.text()).split('.')[0])
-		print('File read')
+	    lista=[str(self.dfList.item(i).text()) for i in xrange(self.dfList.count())]
+            if str(self.inp.text()).split('.')[0] not in lista:    
+                    self.df[str(self.inp.text()).split('.')[0]]=pd.read_csv(str(self.inp.text()))
+		    self.dfList.addItem(str(self.inp.text()).split('.')[0])
+		    print('File read')
         except IOError:
             print('No such file')
     def df_selected(self):
