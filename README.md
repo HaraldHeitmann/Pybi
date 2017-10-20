@@ -32,4 +32,4 @@ Make a free, simple and "scalable"(?) GUI *PowerBI-ish* or *Tableau-ish*
 
 * move to python3 
 
-* move functions to diferent modules
+* move functions to different modules
