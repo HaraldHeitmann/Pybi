@@ -63,9 +63,26 @@ class Main(QMainWindow, Ui_MainWindow):
         if str(self.plotBox.currentText())=='scatter':
             if self.stgList.count()!=2:
                 raise TypeError('Select just two columns')
-            else:
-                pass
-       
+            else:   
+                 if self.current_name not in self.plots.keys():      
+                     generated_plot={}
+                     col1 = str(self.stgList.item(0).text())
+                     col2 = str(self.stgList.item(1).text())
+                     data1 = self.currentDF[col1].values
+                     data2 = self.currentDF[col2].values
+                     f,ax = plt.subplots()
+                     ax.scatter(data1,data2) 
+                     generated_plot[col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
+                     self.plots[self.current_name]=generated_plot
+                 else:
+                     col1 = str(self.stgList.item(0).text())
+                     col2 = str(self.stgList.item(1).text())
+                     data1 = self.currentDF[col1].values
+                     data2 = self.currentDF[col2].values
+                     f,ax = plt.subplots()
+                     ax.scatter(data1,data2) 
+                     self.plots[self.current_name][col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
+
         elif str(self.plotBox.currentText())=='plot':
             if self.current_name not in self.plots.keys():
                 generated_plots = {}
