@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>913</width>
-    <height>444</height>
+    <height>570</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="plotList"/>
+       <widget class="QListWidget" name="dfList"/>
       </item>
       <item>
        <widget class="QLabel" name="label_3">
@@ -42,7 +42,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QListWidget" name="dfList">
+       <widget class="QListWidget" name="plotList">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
           <horstretch>0</horstretch>
@@ -113,6 +113,13 @@
        </item>
        <item>
         <widget class="QListWidget" name="stgList"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pltBtn">
+         <property name="text">
+          <string>Plot</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
