@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>825</width>
+    <width>913</width>
     <height>444</height>
    </rect>
   </property>
@@ -28,6 +28,16 @@
        <widget class="QPushButton" name="rdBtn">
         <property name="text">
          <string>Read File</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="plotList"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Plots</string>
         </property>
        </widget>
       </item>
@@ -90,6 +100,9 @@
        </item>
        <item>
         <widget class="QListWidget" name="colList"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="plotBox"/>
        </item>
        <item>
         <widget class="QLabel" name="label_2">
