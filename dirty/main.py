@@ -60,18 +60,28 @@ class Main(QMainWindow, Ui_MainWindow):
         
         # here goes some logic to create different plots depending on the selection of plotBox
         # print self.currentDF
-        if self.current_name not in self.plots.keys():
-            generated_plots = {}
-            for col in items:
-                f,ax = plt.subplots()
-                self.currentDF[col].plot(ax=ax)
-                generated_plots[col +' '+ str(self.plotBox.currentText())] = f
-            self.plots[self.current_name] = generated_plots	
-        else:
-            for col in items:
-                f,ax = plt.subplots()
-                self.currentDF[col].plot(ax=ax)
-                self.plots[self.current_name][col +' '+ str(self.plotBox.currentText())] = f
+        if str(self.plotBox.currentText())=='scatter':
+            if self.stgList.count()!=2:
+                raise TypeError('Select just two columns')
+            else:
+                pass
+       
+        elif str(self.plotBox.currentText())=='plot':
+            if self.current_name not in self.plots.keys():
+                generated_plots = {}
+                for col in items:
+                    f,ax = plt.subplots()
+                    self.currentDF[col].plot(ax=ax)
+                    generated_plots[col +' '+ str(self.plotBox.currentText())] = f
+                self.plots[self.current_name] = generated_plots	
+            else:
+                for col in items:
+                    f,ax = plt.subplots()
+                    self.currentDF[col].plot(ax=ax)
+                    self.plots[self.current_name][col +' '+ str(self.plotBox.currentText())] = f
+        
+        elif str(self.plotBox.currentText())=='histogram':
+            pass 
         self.plotList.clear()
         for plot_dict in self.plots[self.current_name].keys():
            self.plotList.addItem(plot_dict) 
