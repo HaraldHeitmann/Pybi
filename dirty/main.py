@@ -27,7 +27,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.current_name = None
         self.plots={}
         self.plotBox.addItems(['histogram','plot','scatter'])
-
+        self.selection = None 
     def read(self):
         try:
             lista=[str(self.dfList.item(i).text()) for i in xrange(self.dfList.count())]
@@ -59,57 +59,59 @@ class Main(QMainWindow, Ui_MainWindow):
             return
         items = [str(self.stgList.item(i).text()) for i in xrange(self.stgList.count())]
         # here goes some logic to create different plots depending on the selection of plotBox
-        if str(self.plotBox.currentText())=='scatter':
-            if self.stgList.count()!=2:
-                raise TypeError('Select just two columns')
-            else:
-                 if self.current_name not in self.plots.keys():
-                     generated_plot={}
-                     col1 = str(self.stgList.item(0).text())
-                     col2 = str(self.stgList.item(1).text())
-                     data1 = self.currentDF[col1].values
-                     data2 = self.currentDF[col2].values
-                     f,ax = plt.subplots()
-                     ax.scatter(data1,data2)
-                     generated_plot[col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
-                     self.plots[self.current_name]=generated_plot
-                 else:
-                     col1 = str(self.stgList.item(0).text())
-                     col2 = str(self.stgList.item(1).text())
-                     data1 = self.currentDF[col1].values
-                     data2 = self.currentDF[col2].values
-                     f,ax = plt.subplots()
-                     ax.scatter(data1,data2)
-                     self.plots[self.current_name][col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
+        if self.selection is None:
+            if str(self.plotBox.currentText())=='scatter':
+                if self.stgList.count()!=2:
+                    raise TypeError('Select just two columns')
+                else:
+                     if self.current_name not in self.plots.keys():
+                         generated_plot={}
+                         col1 = str(self.stgList.item(0).text())
+                         col2 = str(self.stgList.item(1).text())
+                         data1 = self.currentDF[col1].values
+                         data2 = self.currentDF[col2].values
+                         f,ax = plt.subplots()
+                         ax.scatter(data1,data2)
+                         generated_plot[col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
+                         self.plots[self.current_name]=generated_plot
+                     else:
+                         col1 = str(self.stgList.item(0).text())
+                         col2 = str(self.stgList.item(1).text())
+                         data1 = self.currentDF[col1].values
+                         data2 = self.currentDF[col2].values
+                         f,ax = plt.subplots()
+                         ax.scatter(data1,data2)
+                         self.plots[self.current_name][col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
 
-        elif str(self.plotBox.currentText())=='plot':
-            if self.current_name not in self.plots.keys():
-                generated_plots = {}
-                for col in items:
-                    f,ax = plt.subplots()
-                    self.currentDF[col].plot(ax=ax)
-                    generated_plots[col +' '+ str(self.plotBox.currentText())] = f
-                self.plots[self.current_name] = generated_plots
-            else:
-                for col in items:
-                    f,ax = plt.subplots()
-                    self.currentDF[col].plot(ax=ax)
-                    self.plots[self.current_name][col +' '+ str(self.plotBox.currentText())] = f
+            elif str(self.plotBox.currentText())=='plot':
+                if self.current_name not in self.plots.keys():
+                    generated_plots = {}
+                    for col in items:
+                        f,ax = plt.subplots()
+                        self.currentDF[col].plot(ax=ax)
+                        generated_plots[col +' '+ str(self.plotBox.currentText())] = f
+                    self.plots[self.current_name] = generated_plots
+                else:
+                    for col in items:
+                        f,ax = plt.subplots()
+                        self.currentDF[col].plot(ax=ax)
+                        self.plots[self.current_name][col +' '+ str(self.plotBox.currentText())] = f
 
-        elif str(self.plotBox.currentText())=='histogram':
-            if self.current_name not in self.plots.keys():
-                generated_plots = {}
-                for col in items:
-                    f,ax = plt.subplots()
-                    self.currentDF[col].hist(ax=ax)
-                    generated_plots[col +' '+ str(self.plotBox.currentText())] = f
-                self.plots[self.current_name] = generated_plots
-            else:
-                for col in items:
-                    f,ax = plt.subplots()
-                    self.currentDF[col].hist(ax=ax)
-                    self.plots[self.current_name][col +' '+ str(self.plotBox.currentText())] = f
-
+            elif str(self.plotBox.currentText())=='histogram':
+                if self.current_name not in self.plots.keys():
+                    generated_plots = {}
+                    for col in items:
+                        f,ax = plt.subplots()
+                        self.currentDF[col].hist(ax=ax)
+                        generated_plots[col +' '+ str(self.plotBox.currentText())] = f
+                    self.plots[self.current_name] = generated_plots
+                else:
+                    for col in items:
+                        f,ax = plt.subplots()
+                        self.currentDF[col].hist(ax=ax)
+                        self.plots[self.current_name][col +' '+ str(self.plotBox.currentText())] = f
+        else:
+            pass
         self.plotList.clear()
         for plot_dict in self.plots[self.current_name].keys():
            self.plotList.addItem(plot_dict)
