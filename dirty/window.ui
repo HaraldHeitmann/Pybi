@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>825</width>
-    <height>444</height>
+    <width>913</width>
+    <height>570</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,12 +16,68 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <item>
+       <widget class="QLineEdit" name="inp">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="rdBtn">
+        <property name="text">
+         <string>Read File</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="dfList"/>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Plots</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QListWidget" name="plotList">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>361</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
      <widget class="QWidget" name="mplwindow" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
         <horstretch>0</horstretch>
         <verstretch>0</verstretch>
        </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>511</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>511</width>
+        <height>16777215</height>
+       </size>
       </property>
       <layout class="QVBoxLayout" name="mplvl"/>
      </widget>
@@ -36,14 +92,34 @@
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <widget class="QPushButton" name="rdBtn">
+        <widget class="QLabel" name="label">
          <property name="text">
-          <string>Read File</string>
+          <string>Columns Availables</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="inp"/>
+        <widget class="QListWidget" name="colList"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="plotBox"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Selected Columns</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="stgList"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pltBtn">
+         <property name="text">
+          <string>Plot</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
