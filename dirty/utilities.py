@@ -36,4 +36,3 @@ def plot_df_multiple(df,cols,cat=None,linestyle=None,marker=None,alpha=None):
                 df[col][df[cat]==opt].plot(label=opt,linestyle=linestyle,marker=marker,alpha=alpha)
                 plt.legend()
             plt.show()
-
