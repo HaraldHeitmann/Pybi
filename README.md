@@ -25,7 +25,9 @@ Make a free, simple and "scalable"(?) GUI *PowerBI-ish* or *Tableau-ish*
 
 * ~~DataFrame and column selection~~
 
-* do some plots/histograms/descriptions of a column(s)
+* do some ~~plots/histograms/scatter~~/descriptions of a column(s)
+
+* add filter column (to plot distinctly different mebers of a column (i.e. plot in red all members where the column equal 1, etc))
 
 3. TAKE IT TO THE LIMIT
 
