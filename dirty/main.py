@@ -27,7 +27,7 @@ class Main(QMainWindow, Ui_MainWindow):
         self.current_name = None
         self.plots={}
         self.plotBox.addItems(['histogram','plot','scatter'])
-        self.selection = None 
+        self.selection = "None"
     def read(self):
         try:
             lista=[str(self.dfList.item(i).text()) for i in xrange(self.dfList.count())]
@@ -41,6 +41,9 @@ class Main(QMainWindow, Ui_MainWindow):
     def df_selected(self):
         self.current_name = str(self.dfList.currentItem().text())
         self.currentDF = self.df[self.current_name]
+        self.filterBox.clear()
+        self.filterBox.addItem("None")
+        self.filterBox.addItems(self.df[str(self.dfList.currentItem().text())].columns)
         if self.colList.count()==0:
             self.colList.addItems(self.df[str(self.dfList.currentItem().text())].columns)
         else:
@@ -59,7 +62,8 @@ class Main(QMainWindow, Ui_MainWindow):
             return
         items = [str(self.stgList.item(i).text()) for i in xrange(self.stgList.count())]
         # here goes some logic to create different plots depending on the selection of plotBox
-        if self.selection is None:
+        self.selection = str(self.filterBox.currentText())
+        if self.selection == "None":
             if str(self.plotBox.currentText())=='scatter':
                 if self.stgList.count()!=2:
                     raise TypeError('Select just two columns')
@@ -111,7 +115,35 @@ class Main(QMainWindow, Ui_MainWindow):
                         self.currentDF[col].hist(ax=ax)
                         self.plots[self.current_name][col +' '+ str(self.plotBox.currentText())] = f
         else:
-            pass
+            if str(self.plotBox.currentText())=='scatter':
+                if self.stgList.count()!=2:
+                    raise TypeError('Select just two columns')
+                else:
+                    if self.current_name not in self.plots.keys():
+                        f,ax = plt.subplots()
+                        for value in self.currentDF[self.selection].unique():
+                            filtered_df = self.currentDF[self.currentDF[self.selection]==value]
+                            generated_plot={}
+                            col1 = str(self.stgList.item(0).text())
+                            col2 = str(self.stgList.item(1).text())
+                            data1 = filtered_df[col1].values
+                            data2 = filtered_df[col2].values
+                            ax.scatter(data1,data2,label=str(value))
+                        f.legend(loc='lower right')
+                        generated_plot[col1+';'+col2 +'; fil= ' + self.selection + str(self.plotBox.currentText())] = f
+                        self.plots[self.current_name]=generated_plot
+                    else:
+                        f,ax = plt.subplots()
+                        for value in self.currentDF[self.selection].unique():
+                            filtered_DF=self.currentDF[self.currentDF[self.selection]==value]
+                            col1 = str(self.stgList.item(0).text())
+                            col2 = str(self.stgList.item(1).text())
+                            data1 = filtered_DF[col1].values
+                            data2 = filtered_DF[col2].values
+                            ax.scatter(data1,data2,label=str(value))
+                        f.legend(loc='lower right')
+                        self.plots[self.current_name][col1+';'+col2 +'; fil= '+self.selection+ str(self.plotBox.currentText())] = f
+
         self.plotList.clear()
         for plot_dict in self.plots[self.current_name].keys():
            self.plotList.addItem(plot_dict)

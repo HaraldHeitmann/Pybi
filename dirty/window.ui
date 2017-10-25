@@ -16,48 +16,62 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <widget class="QLineEdit" name="inp">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="rdBtn">
-        <property name="text">
-         <string>Read File</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QListWidget" name="dfList"/>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Plots</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QListWidget" name="plotList">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>361</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QWidget" name="widget2" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>10</width>
+        <height>0</height>
+       </size>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLineEdit" name="inp">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="rdBtn">
+         <property name="text">
+          <string>Read File</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="dfList"/>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Plots</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="plotList">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>361</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </item>
     <item>
      <widget class="QWidget" name="mplwindow" native="true">
@@ -94,7 +108,7 @@
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Columns Availables</string>
+          <string>Colu&amp;mns Availables</string>
          </property>
         </widget>
        </item>
@@ -107,12 +121,15 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Selected Columns</string>
+          <string>Se&amp;lected Columns</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QListWidget" name="stgList"/>
+       </item>
+       <item>
+        <widget class="QComboBox" name="filterBox"/>
        </item>
        <item>
         <widget class="QPushButton" name="pltBtn">
