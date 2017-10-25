@@ -1,13 +1,13 @@
 from PyQt4.uic import loadUiType
-from mpl_toolkits.mplot3d import Axes3D
 from matplotlib.figure import Figure
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
-
 from matplotlib.backends.backend_qt4agg import (
-    FigureCanvasQTAgg as FigureCanvas,
-    NavigationToolbar2QT as NavigationToolbar)
+                                                FigureCanvasQTAgg as FigureCanvas
+                                                ,NavigationToolbar2QT as NavigationToolbar
+                                               )
+
 Ui_MainWindow, QMainWindow = loadUiType('window.ui')
 
 class Main(QMainWindow, Ui_MainWindow):
@@ -28,13 +28,13 @@ class Main(QMainWindow, Ui_MainWindow):
         self.plots={}
         self.plotBox.addItems(['histogram','plot','scatter'])
         self.selection = "None"
+
     def read(self):
         try:
             lista=[str(self.dfList.item(i).text()) for i in xrange(self.dfList.count())]
             if str(self.inp.text()).split('.')[0] not in lista:
                 self.df[str(self.inp.text()).split('.')[0]]=pd.read_csv(str(self.inp.text()))
                 self.dfList.addItem(str(self.inp.text()).split('.')[0])
-            print('File read')
         except IOError:
             print('No such file')
 
@@ -68,51 +68,55 @@ class Main(QMainWindow, Ui_MainWindow):
                 if self.stgList.count()!=2:
                     raise TypeError('Select just two columns')
                 else:
-                     if self.current_name not in self.plots.keys():
-                         generated_plot={}
-                         col1 = str(self.stgList.item(0).text())
-                         col2 = str(self.stgList.item(1).text())
-                         data1 = self.currentDF[col1].values
-                         data2 = self.currentDF[col2].values
-                         f,ax = plt.subplots()
-                         ax.scatter(data1,data2)
-                         generated_plot[col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
-                         self.plots[self.current_name]=generated_plot
-                     else:
-                         col1 = str(self.stgList.item(0).text())
-                         col2 = str(self.stgList.item(1).text())
-                         data1 = self.currentDF[col1].values
-                         data2 = self.currentDF[col2].values
-                         f,ax = plt.subplots()
-                         ax.scatter(data1,data2)
-                         self.plots[self.current_name][col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
-
+                    if self.current_name not in self.plots.keys():
+                        generated_plot={}
+                        col1 = str(self.stgList.item(0).text())
+                        col2 = str(self.stgList.item(1).text())
+                        data1 = self.currentDF[col1].values
+                        data2 = self.currentDF[col2].values
+                        f,ax = plt.subplots()
+                        ax.scatter(data1,data2)
+                        ax.set(xlabel=col1,ylabel=col2)
+                        generated_plot[col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
+                        self.plots[self.current_name]=generated_plot
+                    else:
+                        col1 = str(self.stgList.item(0).text())
+                        col2 = str(self.stgList.item(1).text())
+                        data1 = self.currentDF[col1].values
+                        data2 = self.currentDF[col2].values
+                        f,ax = plt.subplots()
+                        ax.scatter(data1,data2)
+                        ax.set(xlabel=col1,ylabel=col2)
+                        self.plots[self.current_name][col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
             elif str(self.plotBox.currentText())=='plot':
                 if self.current_name not in self.plots.keys():
                     generated_plots = {}
                     for col in items:
                         f,ax = plt.subplots()
                         self.currentDF[col].plot(ax=ax)
+                        ax.set(ylabel=col,xlabel='index')
                         generated_plots[col +' '+ str(self.plotBox.currentText())] = f
                     self.plots[self.current_name] = generated_plots
                 else:
                     for col in items:
                         f,ax = plt.subplots()
                         self.currentDF[col].plot(ax=ax)
+                        ax.set(ylabel=col,xlabel='index')
                         self.plots[self.current_name][col +' '+ str(self.plotBox.currentText())] = f
-
             elif str(self.plotBox.currentText())=='histogram':
                 if self.current_name not in self.plots.keys():
                     generated_plots = {}
                     for col in items:
                         f,ax = plt.subplots()
                         self.currentDF[col].hist(ax=ax)
+                        ax.set(xlabel=col,ylabel='count')
                         generated_plots[col +' '+ str(self.plotBox.currentText())] = f
                     self.plots[self.current_name] = generated_plots
                 else:
                     for col in items:
                         f,ax = plt.subplots()
                         self.currentDF[col].hist(ax=ax)
+                        ax.set(xlabel=col,ylabel='count')
                         self.plots[self.current_name][col +' '+ str(self.plotBox.currentText())] = f
         else:
             if str(self.plotBox.currentText())=='scatter':
@@ -129,6 +133,7 @@ class Main(QMainWindow, Ui_MainWindow):
                             data1 = filtered_df[col1].values
                             data2 = filtered_df[col2].values
                             ax.scatter(data1,data2,label=str(value))
+                        ax.set(xlabel=col1,ylabel=col2)
                         f.legend()
                         generated_plot[col1+';'+col2 +'; fil= ' + self.selection +' '+ str(self.plotBox.currentText())] = f
                         self.plots[self.current_name]=generated_plot
@@ -141,6 +146,7 @@ class Main(QMainWindow, Ui_MainWindow):
                             data1 = filtered_DF[col1].values
                             data2 = filtered_DF[col2].values
                             ax.scatter(data1,data2,label=str(value))
+                        ax.set(xlabel=col1,ylabel=col2)
                         f.legend()
                         self.plots[self.current_name][col1+';'+col2 +'; fil= '+self.selection+' '+ str(self.plotBox.currentText())] = f
             elif str(self.plotBox.currentText())=='histogram':
@@ -151,6 +157,7 @@ class Main(QMainWindow, Ui_MainWindow):
                         for value in self.currentDF[self.selection].unique():
                             filtered_df = self.currentDF[self.currentDF[self.selection]==value]
                             filtered_df[col].hist(ax=ax,label=str(value),alpha=0.5)
+                        ax.set(xlabel=col,ylabel='count')
                         f.legend()
                         generated_plots[col +';fil= '+self.selection+' '+ str(self.plotBox.currentText())] = f
                     self.plots[self.current_name] = generated_plots
@@ -160,6 +167,7 @@ class Main(QMainWindow, Ui_MainWindow):
                         for value in self.currentDF[self.selection].unique():
                             filtered_df = self.currentDF[self.currentDF[self.selection]==value]
                             filtered_df[col].hist(ax=ax,alpha=0.5,label=str(value))
+                        ax.set(xlabel=col,ylabel='count')
                         f.legend()
                         self.plots[self.current_name][col +';fil= '+self.selection+' '+ str(self.plotBox.currentText())] = f
             else:
@@ -170,6 +178,7 @@ class Main(QMainWindow, Ui_MainWindow):
                         for value in self.currentDF[self.selection].unique():
                             filtered_df = self.currentDF[self.currentDF[self.selection]==value] # .reset_index() intended to time series, uncomment otherwise
                             filtered_df[col].plot(ax=ax,label=str(value),alpha=0.5)
+                        ax.set(xlabel='index',ylabel=col)
                         f.legend()
                         generated_plots[col +';fil= '+self.selection+' '+ str(self.plotBox.currentText())] = f
                     self.plots[self.current_name] = generated_plots
@@ -179,17 +188,21 @@ class Main(QMainWindow, Ui_MainWindow):
                         for value in self.currentDF[self.selection].unique():
                             filtered_df = self.currentDF[self.currentDF[self.selection]==value] # .reset_index() intended to time series uncomment otherwise
                             filtered_df[col].plot(ax=ax,alpha=0.5,label=str(value))
+                        ax.set(xlabel='index',ylabel=col)
                         f.legend()
                         self.plots[self.current_name][col +';fil= '+self.selection+' '+ str(self.plotBox.currentText())] = f
         self.plotList.clear()
         for plot_dict in self.plots[self.current_name].keys():
            self.plotList.addItem(plot_dict)
+
     def show_fig(self):
         self.rmmpl()
         fig_name = str(self.plotList.currentItem().text())
         self.addmpl(self.plots[self.current_name][fig_name])
+
     def rmvcol(self):
         self.stgList.takeItem(self.stgList.row(self.stgList.currentItem()))
+
     def clear(self):
         self.mplfigs.clear()
         self.rmmpl()
