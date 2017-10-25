@@ -129,8 +129,8 @@ class Main(QMainWindow, Ui_MainWindow):
                             data1 = filtered_df[col1].values
                             data2 = filtered_df[col2].values
                             ax.scatter(data1,data2,label=str(value))
-                        f.legend(loc='lower right')
-                        generated_plot[col1+';'+col2 +'; fil= ' + self.selection + str(self.plotBox.currentText())] = f
+                        f.legend()
+                        generated_plot[col1+';'+col2 +'; fil= ' + self.selection +' '+ str(self.plotBox.currentText())] = f
                         self.plots[self.current_name]=generated_plot
                     else:
                         f,ax = plt.subplots()
@@ -141,9 +141,46 @@ class Main(QMainWindow, Ui_MainWindow):
                             data1 = filtered_DF[col1].values
                             data2 = filtered_DF[col2].values
                             ax.scatter(data1,data2,label=str(value))
-                        f.legend(loc='lower right')
-                        self.plots[self.current_name][col1+';'+col2 +'; fil= '+self.selection+ str(self.plotBox.currentText())] = f
-
+                        f.legend()
+                        self.plots[self.current_name][col1+';'+col2 +'; fil= '+self.selection+' '+ str(self.plotBox.currentText())] = f
+            elif str(self.plotBox.currentText())=='histogram':
+                if self.current_name not in self.plots.keys():
+                    generated_plots = {}
+                    for col in items:
+                        f,ax = plt.subplots()
+                        for value in self.currentDF[self.selection].unique():
+                            filtered_df = self.currentDF[self.currentDF[self.selection]==value]
+                            filtered_df[col].hist(ax=ax,label=str(value),alpha=0.5)
+                        f.legend()
+                        generated_plots[col +';fil= '+self.selection+' '+ str(self.plotBox.currentText())] = f
+                    self.plots[self.current_name] = generated_plots
+                else:
+                    for col in items:
+                        f,ax = plt.subplots()
+                        for value in self.currentDF[self.selection].unique():
+                            filtered_df = self.currentDF[self.currentDF[self.selection]==value]
+                            filtered_df[col].hist(ax=ax,alpha=0.5,label=str(value))
+                        f.legend()
+                        self.plots[self.current_name][col +';fil= '+self.selection+' '+ str(self.plotBox.currentText())] = f
+            else:
+                if self.current_name not in self.plots.keys():
+                    generated_plots = {}
+                    for col in items:
+                        f,ax = plt.subplots()
+                        for value in self.currentDF[self.selection].unique():
+                            filtered_df = self.currentDF[self.currentDF[self.selection]==value] # .reset_index() intended to time series, uncomment otherwise
+                            filtered_df[col].plot(ax=ax,label=str(value),alpha=0.5)
+                        f.legend()
+                        generated_plots[col +';fil= '+self.selection+' '+ str(self.plotBox.currentText())] = f
+                    self.plots[self.current_name] = generated_plots
+                else:
+                    for col in items:
+                        f,ax = plt.subplots()
+                        for value in self.currentDF[self.selection].unique():
+                            filtered_df = self.currentDF[self.currentDF[self.selection]==value] # .reset_index() intended to time series uncomment otherwise
+                            filtered_df[col].plot(ax=ax,alpha=0.5,label=str(value))
+                        f.legend()
+                        self.plots[self.current_name][col +';fil= '+self.selection+' '+ str(self.plotBox.currentText())] = f
         self.plotList.clear()
         for plot_dict in self.plots[self.current_name].keys():
            self.plotList.addItem(plot_dict)
