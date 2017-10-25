@@ -41,6 +41,6 @@ Make a free, simple and "scalable"(?) GUI *PowerBI-ish* or *Tableau-ish*
 
 4. TAKE IT TO THE LIMIT
 
-* move to python3 
+* move to python3 :muscle::muscle:
 
-* move functions to different modules
+* move functions to different modules :muscle:
