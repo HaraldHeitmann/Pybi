@@ -2,7 +2,7 @@
 
 Pybi is intended to be a GUI to describe and visualize pandas DataFrames. Eventually make some simple data analysis on them.
 
-Strong dependencies are pandas (implies numpy and matplotib) to DataFrame data management and PyQt4 for the graphical user interface.
+Strong dependencies are pandas (implies numpy and matplotib) to DataFrame data management and PyQt4 for the graphical user interface, eventually sklearn maybe(?)
 
 ## Expectations:
 
