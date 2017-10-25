@@ -27,9 +27,19 @@ Make a free, simple and "scalable"(?) GUI *PowerBI-ish* or *Tableau-ish*
 
 * do some ~~plots/histograms/scatter~~/descriptions of a column(s)
 
-* add filter column (to plot distinctly different mebers of a column (i.e. plot in red all members where the column equal 1, etc))
+* ~~add filter column (to plot distinctly different mebers of a column (i.e. plot in red all members where the column equal 1, etc))~~
 
-3. TAKE IT TO THE LIMIT
+3. ADVANCED ANALYSIS:
+
+* implement logistic regression
+
+* implement linear regression
+
+* implement k-means clustering
+
+* PCA (? is it worth-it? how to implement?)
+
+4. TAKE IT TO THE LIMIT
 
 * move to python3 
 
