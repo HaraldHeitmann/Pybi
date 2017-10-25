@@ -43,6 +43,10 @@ class Main(QMainWindow, Ui_MainWindow):
         self.currentDF = self.df[self.current_name]
         self.filterBox.clear()
         self.filterBox.addItem("None")
+        self.plotList.clear()
+        self.rmmpl()
+        if self.current_name in self.plots.keys():
+            self.plotList.addItems(self.plots[self.current_name].keys())
         self.filterBox.addItems(self.df[str(self.dfList.currentItem().text())].columns)
         if self.colList.count()==0:
             self.colList.addItems(self.df[str(self.dfList.currentItem().text())].columns)
