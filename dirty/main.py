@@ -9,6 +9,16 @@ from matplotlib.backends.backend_qt4agg import (
                                                )
 
 Ui_MainWindow, QMainWindow = loadUiType('window.ui')
+Ui_secWindow, QsecWindow = loadUiType('analysis.ui')
+
+
+class Sec(QsecWindow, Ui_secWindow):
+    def __init__(self,_parent):
+        super(Sec,self).__init__(parent=_parent)
+        self.setupUi(self)
+        # here goes the logic of the window
+    def a_func(self):
+        pass
 
 class Main(QMainWindow, Ui_MainWindow):
     def __init__(self, ):
