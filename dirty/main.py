@@ -12,10 +12,11 @@ Ui_MainWindow, QMainWindow = loadUiType('window.ui')
 Ui_secWindow, QsecWindow = loadUiType('analysis.ui')
 
 
-class Sec(QsecWindow, Ui_secWindow):
+class Sec(QsecWindow, Ui_secWindow): # here goes some serious logic on how passing dataframes and it's characteristics, efficiently and with few lines of code...
     def __init__(self,_parent):
         super(Sec,self).__init__(parent=_parent)
         self.setupUi(self)
+        self.aBox.addItems(['Cluster','Regresion','Clasify']) # fix spelling
         # here goes the logic of the window
     def a_func(self):
         pass
@@ -38,6 +39,11 @@ class Main(QMainWindow, Ui_MainWindow):
         self.plots={}
         self.plotBox.addItems(['histogram','plot','scatter'])
         self.selection = "None"
+        self.aBtn.clicked.connect(self.spawn_child)
+
+    def spawn_child(self):
+        sec=Sec(self)
+        sec.show()
 
     def read(self):
         try:

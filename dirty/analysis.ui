@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>517</width>
-    <height>315</height>
+    <height>452</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,10 +19,20 @@
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QComboBox" name="comboBox"/>
+     <widget class="QComboBox" name="aBox"/>
     </item>
-    <item alignment="Qt::AlignHCenter">
-     <widget class="QWidget" name="widget" native="true"/>
+    <item>
+     <widget class="QListWidget" name="optList"/>
+    </item>
+    <item>
+     <widget class="QListWidget" name="featList"/>
+    </item>
+    <item>
+     <widget class="QPushButton" name="fitBtn">
+      <property name="text">
+       <string>Fit</string>
+      </property>
+     </widget>
     </item>
    </layout>
   </widget>
