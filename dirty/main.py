@@ -17,9 +17,27 @@ class Sec(QsecWindow, Ui_secWindow): # here goes some serious logic on how passi
         super(Sec,self).__init__(parent=_parent)
         self.setupUi(self)
         self.aBox.addItems(['Cluster','Regresion','Clasify']) # fix spelling
+        self.df = self.parent().currentDF
+        self.name = self.parent().current_name
         # here goes the logic of the window
-    def a_func(self):
-        pass
+        if self.df is not None:
+            self.optList.addItems(self.df.columns)
+        self.fitBtn.clicked.connect(self.fit)
+        self.optList.itemDoubleClicked.connect(self.addcol)
+        self.featList.itemDoubleClicked.connect(self.rmvcol)
+
+    def fit(self):
+        print self.df
+        print self.name
+
+    def addcol(self):
+        items = [self.featList.item(i).text() for i in xrange(self.featList.count())]
+        if str(self.optList.currentItem().text()) not in items:
+            self.featList.addItem(str(self.optList.currentItem().text()))
+
+    def rmvcol(self):
+        self.featList.takeItem(self.featList.row(self.featList.currentItem()))
+
 
 class Main(QMainWindow, Ui_MainWindow):
     def __init__(self, ):
@@ -75,7 +93,6 @@ class Main(QMainWindow, Ui_MainWindow):
         items = [self.stgList.item(i).text() for i in xrange(self.stgList.count())]
         if str(self.colList.currentItem().text()) not in items:
             self.stgList.addItem(str(self.colList.currentItem().text()))
-            col=str(self.colList.currentItem().text())
 
     def plot(self):
         if self.currentDF is None:
