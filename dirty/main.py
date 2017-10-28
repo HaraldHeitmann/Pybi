@@ -31,7 +31,6 @@ class Sec(QsecWindow, Ui_secWindow): # here goes some serious logic on how passi
 
     def fit(self):
         if str(self.aBox.currentText())=='Cluster':
-            print self.name
             try:
                 n = int(self.inp.text())
                 if n<1:
@@ -43,6 +42,7 @@ class Sec(QsecWindow, Ui_secWindow): # here goes some serious logic on how passi
             data = self.df[items].values
             labels = km.fit_predict(data)
             self.parent().currentDF['clusterized_'+str(n)]=labels
+            print 'Done!'
         elif str(self.aBox.currentText())=='Classify':
             pass
         else:
