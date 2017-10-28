@@ -22,6 +22,9 @@
      <widget class="QComboBox" name="aBox"/>
     </item>
     <item>
+     <widget class="QLineEdit" name="inp"/>
+    </item>
+    <item>
      <widget class="QListWidget" name="optList"/>
     </item>
     <item>

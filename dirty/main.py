@@ -8,6 +8,9 @@ from matplotlib.backends.backend_qt4agg import (
                                                 ,NavigationToolbar2QT as NavigationToolbar
                                                )
 
+from sklearn.cluster import KMeans
+from sklearn.metrics import confusion_matrix
+from sklearn.preprocessing import Binarizer
 Ui_MainWindow, QMainWindow = loadUiType('window.ui')
 Ui_secWindow, QsecWindow = loadUiType('analysis.ui')
 
@@ -16,7 +19,7 @@ class Sec(QsecWindow, Ui_secWindow): # here goes some serious logic on how passi
     def __init__(self,_parent):
         super(Sec,self).__init__(parent=_parent)
         self.setupUi(self)
-        self.aBox.addItems(['Cluster','Regresion','Clasify']) # fix spelling
+        self.aBox.addItems(['Cluster','Regression','Classify']) # fix spelling
         self.df = self.parent().currentDF
         self.name = self.parent().current_name
         # here goes the logic of the window
@@ -27,8 +30,23 @@ class Sec(QsecWindow, Ui_secWindow): # here goes some serious logic on how passi
         self.featList.itemDoubleClicked.connect(self.rmvcol)
 
     def fit(self):
-        print self.df
-        print self.name
+        if str(self.aBox.currentText())=='Cluster':
+            print self.name
+            try:
+                n = int(self.inp.text())
+                if n<1:
+                    raise ValueError()
+            except ValueError:
+                raise ValueError('Enter an integer!. "{}" is not an int'.format(str(self.inp.text()))) # don't do this!
+            km = KMeans(n_clusters=n)
+            items = [str(self.featList.item(i).text()) for i in xrange(self.featList.count())]
+            data = self.df[items].values
+            labels = km.fit_predict(data)
+            self.parent().currentDF['clusterized_'+str(n)]=labels
+        elif str(self.aBox.currentText())=='Classify':
+            pass
+        else:
+            pass
 
     def addcol(self):
         items = [self.featList.item(i).text() for i in xrange(self.featList.count())]
