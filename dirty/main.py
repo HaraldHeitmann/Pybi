@@ -130,7 +130,7 @@ class Main(QMainWindow, Ui_MainWindow):
                         data1 = self.currentDF[col1].values
                         data2 = self.currentDF[col2].values
                         f,ax = plt.subplots()
-                        ax.scatter(data1,data2)
+                        ax.scatter(data1,data2,alpha=0.5)
                         ax.set(xlabel=col1,ylabel=col2)
                         generated_plot[col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
                         self.plots[self.current_name]=generated_plot
@@ -140,7 +140,7 @@ class Main(QMainWindow, Ui_MainWindow):
                         data1 = self.currentDF[col1].values
                         data2 = self.currentDF[col2].values
                         f,ax = plt.subplots()
-                        ax.scatter(data1,data2)
+                        ax.scatter(data1,data2,alpha=0.5)
                         ax.set(xlabel=col1,ylabel=col2)
                         self.plots[self.current_name][col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
             elif str(self.plotBox.currentText())=='plot':
@@ -187,7 +187,7 @@ class Main(QMainWindow, Ui_MainWindow):
                             col2 = str(self.stgList.item(1).text())
                             data1 = filtered_df[col1].values
                             data2 = filtered_df[col2].values
-                            ax.scatter(data1,data2,label=str(value))
+                            ax.scatter(data1,data2,label=str(value),alpha=0.5)
                         ax.set(xlabel=col1,ylabel=col2)
                         f.legend()
                         generated_plot[col1+';'+col2 +'; fil= ' + self.selection +' '+ str(self.plotBox.currentText())] = f
@@ -200,7 +200,7 @@ class Main(QMainWindow, Ui_MainWindow):
                             col2 = str(self.stgList.item(1).text())
                             data1 = filtered_DF[col1].values
                             data2 = filtered_DF[col2].values
-                            ax.scatter(data1,data2,label=str(value))
+                            ax.scatter(data1,data2,label=str(value),alpha=0.5)
                         ax.set(xlabel=col1,ylabel=col2)
                         f.legend()
                         self.plots[self.current_name][col1+';'+col2 +'; fil= '+self.selection+' '+ str(self.plotBox.currentText())] = f
