@@ -1,3 +1,4 @@
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/HaraldHeitmann/Pybi.png?columns=all)](https://waffle.io/HaraldHeitmann/Pybi?utm_source=badge)
 # Pybi! 
 
 Pybi is intended to be a GUI to describe and visualize pandas DataFrames. Eventually make some simple data analysis on them.
