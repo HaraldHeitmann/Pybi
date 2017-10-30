@@ -1,5 +1,7 @@
 # Pybi! 
 
+[![Waffle.io - Issues in progress](https://badge.waffle.io/HaraldHeitmann/Pybi.png?label=in%20progress&title=In%20Progress)](http://waffle.io/HaraldHeitmann/Pybi)
+
 Pybi is intended to be a GUI to describe and visualize pandas DataFrames. Eventually make some simple data analysis on them.
 
 Strong dependencies are pandas (implies numpy and matplotib) to DataFrame data management and PyQt4 for the graphical user interface, eventually sklearn maybe(?)
@@ -44,5 +46,3 @@ Make a free, simple and "scalable"(?) GUI *PowerBI-ish* or *Tableau-ish*
 * move to python3 :muscle::muscle:
 
 * move functions to different modules :muscle:
-
-[![Waffle.io - Issues in progress](https://badge.waffle.io/HaraldHeitmann/Pybi.png?label=in%20progress&title=In%20Progress)](http://waffle.io/HaraldHeitmann/Pybi)
