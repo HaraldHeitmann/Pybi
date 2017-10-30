@@ -8,7 +8,54 @@ from matplotlib.backends.backend_qt4agg import (
                                                 ,NavigationToolbar2QT as NavigationToolbar
                                                )
 
+from sklearn.cluster import KMeans
+from sklearn.metrics import confusion_matrix
+from sklearn.preprocessing import Binarizer
 Ui_MainWindow, QMainWindow = loadUiType('window.ui')
+Ui_secWindow, QsecWindow = loadUiType('analysis.ui')
+
+
+class Sec(QsecWindow, Ui_secWindow): # here goes some serious logic on how passing dataframes and it's characteristics, efficiently and with few lines of code...
+    def __init__(self,_parent):
+        super(Sec,self).__init__(parent=_parent)
+        self.setupUi(self)
+        self.aBox.addItems(['Cluster','Regression','Classify']) # fix spelling
+        self.df = self.parent().currentDF
+        self.name = self.parent().current_name
+        # here goes the logic of the window
+        if self.df is not None:
+            self.optList.addItems(self.df.columns)
+        self.fitBtn.clicked.connect(self.fit)
+        self.optList.itemDoubleClicked.connect(self.addcol)
+        self.featList.itemDoubleClicked.connect(self.rmvcol)
+
+    def fit(self):
+        if str(self.aBox.currentText())=='Cluster':
+            try:
+                n = int(self.inp.text())
+                if n<1:
+                    raise ValueError()
+            except ValueError:
+                raise ValueError('Enter an integer!. "{}" is not an int'.format(str(self.inp.text()))) # don't do this!
+            km = KMeans(n_clusters=n)
+            items = [str(self.featList.item(i).text()) for i in xrange(self.featList.count())]
+            data = self.df[items].values
+            labels = km.fit_predict(data)
+            self.parent().currentDF['clusterized_'+str(n)]=labels
+            print 'Done!'
+        elif str(self.aBox.currentText())=='Classify':
+            pass
+        else:
+            pass
+
+    def addcol(self):
+        items = [self.featList.item(i).text() for i in xrange(self.featList.count())]
+        if str(self.optList.currentItem().text()) not in items:
+            self.featList.addItem(str(self.optList.currentItem().text()))
+
+    def rmvcol(self):
+        self.featList.takeItem(self.featList.row(self.featList.currentItem()))
+
 
 class Main(QMainWindow, Ui_MainWindow):
     def __init__(self, ):
@@ -28,6 +75,11 @@ class Main(QMainWindow, Ui_MainWindow):
         self.plots={}
         self.plotBox.addItems(['histogram','plot','scatter'])
         self.selection = "None"
+        self.aBtn.clicked.connect(self.spawn_child)
+
+    def spawn_child(self):
+        sec=Sec(self)
+        sec.show()
 
     def read(self):
         try:
@@ -59,7 +111,6 @@ class Main(QMainWindow, Ui_MainWindow):
         items = [self.stgList.item(i).text() for i in xrange(self.stgList.count())]
         if str(self.colList.currentItem().text()) not in items:
             self.stgList.addItem(str(self.colList.currentItem().text()))
-            col=str(self.colList.currentItem().text())
 
     def plot(self):
         if self.currentDF is None:

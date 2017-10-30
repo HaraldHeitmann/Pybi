@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>913</width>
-    <height>570</height>
+    <height>586</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -70,6 +70,13 @@
          </property>
         </widget>
        </item>
+       <item>
+        <widget class="QPushButton" name="aBtn">
+         <property name="text">
+          <string>Analysis</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </widget>
     </item>
@@ -89,7 +96,7 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>511</width>
+        <width>16777215</width>
         <height>16777215</height>
        </size>
       </property>
@@ -108,7 +115,7 @@
        <item>
         <widget class="QLabel" name="label">
          <property name="text">
-          <string>Colu&amp;mns Availables</string>
+          <string>Columns Availables</string>
          </property>
         </widget>
        </item>
@@ -121,7 +128,7 @@
        <item>
         <widget class="QLabel" name="label_2">
          <property name="text">
-          <string>Se&amp;lected Columns</string>
+          <string>Selected Columns</string>
          </property>
         </widget>
        </item>
