@@ -44,3 +44,5 @@ Make a free, simple and "scalable"(?) GUI *PowerBI-ish* or *Tableau-ish*
 * move to python3 :muscle::muscle:
 
 * move functions to different modules :muscle:
+
+[![Waffle.io - Issues in progress](https://badge.waffle.io/HaraldHeitmann/Pybi.png?label=in%20progress&title=In%20Progress)](http://waffle.io/HaraldHeitmann/Pybi)
