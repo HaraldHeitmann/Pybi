@@ -132,6 +132,7 @@ class Main(QMainWindow, Ui_MainWindow):
                         f,ax = plt.subplots()
                         ax.scatter(data1,data2,alpha=0.5)
                         ax.set(xlabel=col1,ylabel=col2)
+                        ax.set_title(col1 + ' vs ' + col2)
                         generated_plot[col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
                         self.plots[self.current_name]=generated_plot
                     else:
@@ -142,6 +143,7 @@ class Main(QMainWindow, Ui_MainWindow):
                         f,ax = plt.subplots()
                         ax.scatter(data1,data2,alpha=0.5)
                         ax.set(xlabel=col1,ylabel=col2)
+                        ax.set_title(col1 + ' vs ' + col2)
                         self.plots[self.current_name][col1+';'+col2 +' '+ str(self.plotBox.currentText())] = f
             elif str(self.plotBox.currentText())=='plot':
                 if self.current_name not in self.plots.keys():
@@ -150,6 +152,7 @@ class Main(QMainWindow, Ui_MainWindow):
                         f,ax = plt.subplots()
                         self.currentDF[col].plot(ax=ax)
                         ax.set(ylabel=col,xlabel='index')
+                        ax.set_title(col + ' Plot')
                         generated_plots[col +' '+ str(self.plotBox.currentText())] = f
                     self.plots[self.current_name] = generated_plots
                 else:
@@ -157,6 +160,7 @@ class Main(QMainWindow, Ui_MainWindow):
                         f,ax = plt.subplots()
                         self.currentDF[col].plot(ax=ax)
                         ax.set(ylabel=col,xlabel='index')
+                        ax.set_title(col + ' Plot')
                         self.plots[self.current_name][col +' '+ str(self.plotBox.currentText())] = f
             elif str(self.plotBox.currentText())=='histogram':
                 if self.current_name not in self.plots.keys():
@@ -165,6 +169,7 @@ class Main(QMainWindow, Ui_MainWindow):
                         f,ax = plt.subplots()
                         self.currentDF[col].hist(ax=ax)
                         ax.set(xlabel=col,ylabel='count')
+                        ax.set_title('Histogram of ' + col)
                         generated_plots[col +' '+ str(self.plotBox.currentText())] = f
                     self.plots[self.current_name] = generated_plots
                 else:
@@ -172,6 +177,7 @@ class Main(QMainWindow, Ui_MainWindow):
                         f,ax = plt.subplots()
                         self.currentDF[col].hist(ax=ax)
                         ax.set(xlabel=col,ylabel='count')
+                        ax.set_title('Histogram of ' + col)
                         self.plots[self.current_name][col +' '+ str(self.plotBox.currentText())] = f
         else:
             if str(self.plotBox.currentText())=='scatter':
