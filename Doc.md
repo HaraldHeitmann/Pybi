@@ -76,7 +76,7 @@ it will launch a window with the following elements:
  2. Input (inp - lineEdit): here you enter some metadata for the algorithm, in the case of clustering, the number of clusters you want to generate (the only thing that for now)
  3. Options List (optList - QlistWidget): shows all the columns of the current dataframe selected (the last you double clicked). Doubleclick a column here to move it to the
  4. Feature List (featList - QlistWidget): shows the columns which the algorith will use to training (*just numeric features for now!*). Double click a column here to remove it from the list.
- 5. Fit Button (fitBrn - QpusButton): click this to fit the model, a message will be displayed on the console when the model finish training (prints "Done!")
+ 5. Fit Button (fitBtn - QpushButton): click this to fit the model, a message will be displayed on the console when the model finish training (prints "Done!")
 
 
 Well, that's about it, more documentation will be added when necessary.
