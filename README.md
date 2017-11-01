@@ -10,6 +10,11 @@ Strong dependencies are pandas (implies numpy and matplotib) to DataFrame data m
 
 Make a free, simple and "scalable"(?) GUI *PowerBI-ish* or *Tableau-ish* 
 
+
+## Instructions:
+
+READ THE DOC(.md)
+
 ### TODO:
 1. MAKE A SIMPLE GUI:
 
