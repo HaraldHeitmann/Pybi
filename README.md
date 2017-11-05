@@ -1,4 +1,6 @@
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/HaraldHeitmann/Pybi.png?columns=all)](https://waffle.io/HaraldHeitmann/Pybi?utm_source=badge)
 # Pybi! 
+
 
 Pybi is intended to be a GUI to describe and visualize pandas DataFrames. Eventually make some simple data analysis on them.
 
@@ -7,6 +9,11 @@ Strong dependencies are pandas (implies numpy and matplotib) to DataFrame data m
 ## Expectations:
 
 Make a free, simple and "scalable"(?) GUI *PowerBI-ish* or *Tableau-ish* 
+
+
+## Instructions:
+
+READ THE DOC(.md)
 
 ### TODO:
 1. MAKE A SIMPLE GUI:

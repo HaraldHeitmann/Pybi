@@ -2,7 +2,11 @@ import pandas as pd
 from matplotlib import pyplos as plt
 from sklearn import preprocessing
 
+<<<<<<< HEAD
 def plot_df(df,col,cat=None,linestyle=None,marker=None):
+=======
+def plot_df(df, col, cat=None, linestyle=None, marker=None):
+>>>>>>> 0ad1c9c86c768387c9379dac673a63bee2bdd23d
     '''df must be a pandas DataFrame,
     col and cat should be in df.columns and
     cat is a categorical variable
@@ -14,28 +18,48 @@ def plot_df(df,col,cat=None,linestyle=None,marker=None):
     if cat is None:
         df[col].plot()
     else:
-        options=df[cat].unique()
+        options = df[cat].unique()
         for opt in options:
-            df[col][df[cat]==opt].plot(label=opt,linestyle=linestyle,marker=marker)
+            df[col][
+                df[cat] == opt].plot(
+                label=opt,
+                linestyle=linestyle,
+                marker=marker)
             plt.legend()
 
+<<<<<<< HEAD
 def plot_df_multiple(df,cols,cat=None,linestyle=None,marker=None,alpha=None):
+=======
+
+def plot_df_multiple(
+        df,
+        cols,
+        cat=None,
+        linestyle=None,
+        marker=None,
+        alpha=None):
+>>>>>>> 0ad1c9c86c768387c9379dac673a63bee2bdd23d
     '''df must be a pandas DataFrame,
     cols is a list of columns of df
     cat is a column of categorical variables
     outputs None, but generates a figure with the corresponding plots
     TO-DO: pass *args and **kwargs to the plot function
     '''
-    if len(set(cols)-set(df.columns))>0:
+    if len(set(cols) - set(df.columns)) > 0:
         print 1
         return
     if cat is None:
         df[cols].plot()
     else:
-        options=df[cat].unique()
+        options = df[cat].unique()
         for col in cols:
             for opt in options:
-                df[col][df[cat]==opt].plot(label=opt,linestyle=linestyle,marker=marker,alpha=alpha)
+                df[col][
+                    df[cat] == opt].plot(
+                    label=opt,
+                    linestyle=linestyle,
+                    marker=marker,
+                    alpha=alpha)
                 plt.legend()
             plt.show()
 
